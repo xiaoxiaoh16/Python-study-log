@@ -1,0 +1,776 @@
+1. Python has six basic operations for numbers:
+	Operation Symbol   Example 
+	Exponentiation **   5**2==25 
+	Multiplication   *   2*3==6 
+	Division   /   14/3==4 
+	Remainder   %   14%3==2 
+	Addition   +   1+2==3 
+	Subtraction   -   4-3==1
+
+2. Notice how Python gives different answers for some problems depending on whether or not there decimal values are used.
+	The order of operations is the same as in math:
+	1). parentheses ()
+	2). exponents **
+	3). multiplication *, division \, and remainder % 
+	4). addition + and subtraction -
+
+3. Notice that the comment starts with a #. Comments are used to communicate with others who read the program and your future self to make clear what is complicated.
+
+4. Python中input()和raw_input()函数的比较与应用
+
+	通过例子来了解 input() 和 raw_input() 的区别及用法，在脚本中输入下面的代码：
+
+	name = input("What's your name?")
+	print "Hello, " + name + "!"
+
+	输出后显示如下：
+
+	What's your name?Chai
+	Traceback (most recent call last):
+	File "ex.py", line 1, in <module>
+	name = input("What's your name?")
+	File "<string>", line 1, in <module>
+	NameError: name 'Chai' is not defined
+
+	虽然看上去是完全合法的程序，结果却无法输出。问题在于 input() 会假设用户输入的是合法的 Python 表达式（或多或少有些与repr函数相反的意思）。试着以带引号的字符串形式 "Chai" 重新输入，显示输出成功。
+
+	What's your name?"Chai"
+	Hello ,Chai!
+
+	对于 input() ，它希望能够读取一个合法的 Python 表达式，即你输入字符串的时候必须使用引号将它括起来，否则它会引发一个 SyntaxError 。
+
+	因此，要求用户必须带着引号输入他们的内容显得有些过分，这时就需要使用 raw_input() 函数，它会把所有的输入当作原始数据（raw data），然后将其放进字符串中。接下来使用一个 raw_input() 的例子：
+
+	print "How much do you weigh?",
+	weight = raw_input()
+	print "So,you are", weight, "heavy."
+	
+	>>
+	How much do you weigh? 80kg
+	So,you are 80kg heavy.
+	
+	最终的输出内容非常顺利。所以，除非对 input() 确实有特殊需要，否则一般情况下都会推荐使用 raw_input() 来与用户进行交互操作。""""""""'""''"""'")""'"""""'")
+
+5. 为什么 %r 有时打印出来的是单引号,而我实际用的是双引号?
+
+   Python 会用最有效的方式打印出字符串,而不是完全按照你写的方式来打印。这样做对于 %r 来 说是可以接受的,因为它是用作 debug 和排错,没必要非打印出多好看的格式。
+   
+   字符串里面没有单引号时且外面是双引号时，输出单引号; 外层是单引号时，输出时无引号;里层有单引号时，输出外层双引号。
+
+6. 怎样将月份显示在新的一行 ?字符串以 \n 开始就可以了, 
+
+7. 为什么你打印时用了 + 而不是逗号?
+	
+   因为我的目的是将两个字符串连接起来,组建成一个新的字符串。后面你会学到,print 里的逗号其实是分隔参数的一种方式。
+
+8. 使用“三引号(triple-quotes)”,也就是 """,你可以在一组三引号之间放入任意多行的文 字
+      
+9. SyntaxError: Non-ASCII character '\xe7' in file 
+   
+   出现这种错误的原因是程序中的编码出问题了，只要在程序的最前面加上
+ 
+   #-*- coding: UTF-8 -*- ''
+
+10. 为什么打开了两次文件没有报错? Python 不会限制你打开文件的次数,事实上有时候多次打开同一个文件是一件必须的事情。
+
+11. 各种文件相关的命令(方法/函数) 
+    • close–关闭文件。跟你编辑器的文件->保存..一个意思。
+    • read – 读取文件内容。你可以把结果赋给一个变量。
+    • readline–读取文本文件中的一行。
+    • truncate–清空文件,请小心使用该命令。
+    • write(stuff) – 将 stuff 写入文件。
+
+12. 用来表示文件的访问模式。如果你用了 'w' 那么你的文件就是写入 (write)模式。除了 'w' 以外,我们还有 'r' 表示读取(read), 'a' 表示追加(append)。
+
+13. 我们 import 了又一个很好用的命令 exists。这个命令将文件名字符串作为参 数,如果文件存在的话,它将返回 True,否则将返回 False
+
+14. Syntax:EOL while scanning string literal 错误。 字符串结尾忘记加引号了。仔细检查那行看看。
+
+15. 函数可以做三样事情:
+    1). 它们给代码片段命名,就跟“变量”给字符串和数字命名一样。
+    2). 它们可以接受参数,就跟你的脚本接受 argv 一样。
+    3). 通过使用 #1) 和 #2),它们可以让你创建“微型脚本”或者“小命令”。
+
+    1). 首先我们告诉 Python 创建一个函数,我们使用到的命令是 def ,也就是“定义(define)”的意 思。
+    2). 紧接着 def 的是函数的名称。本例中它的名称是 “print_two”,但名字可以随便取,就叫 “peanuts” 也没关系。但最好函数的名称能够体现出函数的功能来。
+    3). 然后我们告诉函数我们需要 *args (asterisk args),这和脚本的 argv 非常相似,参数必须放 在圆括号 () 中才能正常工作。
+    4). 接着我们用冒号 : 结束本行,然后开始下一行缩进。
+    5). 冒号以下,使用 4 个空格缩进的行都是属于 print_two 这个函数的内容。其中第一行的作用是将参数解包,这和脚本参数解包的原理差不多。
+    6). 为了演示它的工作原理,我们把解包后的每个参数都打印出来,这和我们在之前脚本练习中所作的类似。
+
+16. 注意事项如下:
+	1). 函数定义是以 def 开始的吗?
+	2). 函数名称是以字符和下划线 _ 组成的吗?
+	3). 函数名称是不是紧跟着括号 ( ?
+	4). 括号里是否包含参数?多个参数是否以逗号隔开?
+	5). 参数名称是否有重复?(不能使用重复的参数名)
+	6). 紧跟着参数的是不是括号和冒号 ): ?
+	7). 紧跟着函数定义的代码是否使用了 4 个空格的缩进 (indent)? 8. 函数结束的位置是否取消了缩进 (“dedent”)?
+ 
+	当你运行(或者说“使用 use”或者“调用 call”)一个函数时,记得检查下面的要点:
+	1). 调运函数时是否使用了函数的名称?
+	2). 函数名称是否紧跟着 ( ?
+	3). 括号后有无参数?多个参数是否以逗号隔开? 
+	4). 函数是否以 ) 结尾?
+
+	按照这两份检查表里的内容检查你的练习,直到你不需要检查表为止。 最后,将下面这句话阅读几遍:
+	“‘运行函数(run)’、‘调用函数(call)’、和 ‘使用函数(use)’是同一个意思”
+
+	函数名称有什么规则?
+	和变量名一样,只要以字母数字以及下划线组成,而且不是数字开始,就可以了。
+	
+	*args 的 * 是什么意思?
+	它的功能是告诉 python 让它把函数的所有参数都接受进来,然后放到名字叫 args 的列表中去。 和你一直在用的 argv 差不多,只不过前者是用在函数上面。没什么特殊情况,我们一般不会经常用到这个东西
+
+	我们可以在函数里用变量名,我们可以在函数里做运算,我们甚至可以将变量和运算结合起来。
+	从一方面来说,函数的参数和我们的生成变量时用的 = 赋值符类似。事实上,如果一个物件你可以用 = 将其命名,你通常也可以将其作为参数传递给一个函数。
+
+17. Python提供了File模块进行文件的操作，他是Python的内置模块。我们在使用File模块的时候，必须先用Popen()函数打开一个文件，在使用结束需要close关闭文件。
+	序号	方法		描述
+	1)	file.close()	关闭文件。关闭后文件不能再进行读写操作。
+	2)	file.flush()	刷新文件内部缓冲，直接把内部缓冲区的数据立刻写入文件, 而不是被动的等待输出缓冲区写入。
+	3)	file.fileno()	返回一个整型的文件描述符(file descriptor FD 整型), 可以用在如os模块的read方法等一些底层操作上。
+	4)	file.isatty()	如果文件连接到一个终端设备返回 True，否则返回 False。
+	5)	file.next()	返回文件下一行。
+	6)	file.read([size])	从文件读取指定的字节数，如果未给定或为负则读取所有。
+	7)	file.readline([size])	读取整行，包括 “\n” 字符。
+	8)	file.readlines([sizehint])	读取所有行并返回列表，若给定sizeint>0，返回总和大约为sizeint字节的行, 实际读取值可能比sizhint较大, 因为需要填充缓冲区。
+	9)	file.seek(offset[, whence])	设置文件当前位置： where=0从起始位置移动，1从当前位置移动，2从结束位置移动。当有换行时，会被换行截断。seek（）无返回值，故值为None。
+		将文件打操作标记移到offset的位置。这个offset一般是相对于文件的开头来计算的，一般为正数。但如果提供了where参数就不一定了， where可以为0表示从头开始计算，1表示以当前位置为原点计算。
+		2表示以文件末尾为原点进行计算。需要注意，如果文件以a或a+的模式打开，每次进行写操作时，文件操作标记会自动返回到文件末尾。
+		seek()的三种模式：
+		a）f.seek(p,0) 移动当文件第p个字节处，绝对位置
+		b）f.seek(p,1) 移动到相对于当前位置之后的p个字节
+		c）f.seek(p,2) 移动到相对文章尾之后的p个字节
+	10)	file.tell()	返回文件当前位置。
+	11)	file.truncate([size])	截取文件，截取的字节通过size指定，默认为当前文件位置。
+	12)	file.write(str)	将字符串写入文件，没有返回值。
+	13)	file.writelines(sequence)	向文件写入一个序列字符串列表，如果需要换行则要自己加入每行的换行符。
+
+18. 怎样使用 raw_input() 输入自定义值?
+	记得 int(raw_input()) 吧?不过这样也有一个问题,那就是你无法输入浮点数,所以你可 以试着使用 float(raw_input())。
+
+19. 下面列出了 Python 支持的所有转义序列。很多你也许不会用到,不过还是要记住它们的格式和功能。 试着在字符串中应用它们,看看它们的功能。
+	转义符		功能
+    \\		Backslash ()反斜杠
+	\'		Single quote (‘) 单引号
+	\"		Double quote (”) 双引号
+	\a		ASCII Bell (BEL) 响铃符
+	\b		ASCII Backspace (BS) 退格符
+	\f		ASCII Formfeed (FF) 进纸符
+	\n		ASCII Linefeed (LF) 换行符
+	\N{name}	Unicode 数据库中的字符名, 其中 name 就是它的名字 (Unicode only)
+	\r ASCII	Carriage Return (CR) 回车符
+	\t ASCII	Horizontal Tab (TAB) 水 平制表符
+	\uxxxx		值为 16 位十 六进制值 xxxx 的字符 (Unicode only)
+	\Uxxxxxxxx	值为 32 位十 六进制值 xxxx 的字符 (Unicode	only)
+	\v		ASCII Vertical Tab (VT) 垂直制 表符
+	\ooo	值为八进制值 ooo 的字符
+	\xhh	值为十六进制 数 hh 的字符
+
+20. 将自己的ex25.py 执行了import,和你做过的其它import一样。在import的时候你不需要加.py 后缀。这个过程里,你把ex25.py 当做了一个“模组(module)”来使用, 你在这个模组里定义的函数也可以直接调用出来。
+
+21. 所谓帮助文档就是你定义函数时放在 """ 之间的东西,它们也被称作 documentation comments (文档注解). exp: 试着执行 help(ex25) 和 help(ex25.break_words) 。这是你得到模组帮助文档的方式。
+
+22. from ex25 import * 的方式导 入模组。这相当于说:“我要把 ex25 中所有的东西 import 进来。
+
+23. 逻辑术语
+    • and与
+	• or或
+	• not非
+	• != (not equal) 不等于 
+	• ==(equal)等于
+	• >=(greater-than-equal)大于等于 
+	• <=(less-than-equal)小于等于
+	• True真
+	• False假
+
+24. 真值表
+
+	NOT						True?
+	not False				True
+	not True?				False
+
+	OR						True?
+	True or False			True
+	True or True			True
+	False or True			True
+	False or False			False
+
+	AND						True?
+	True and False			False
+	True and True			True
+	False and False			True
+	False and False			False
+
+
+	NOT OR					True?
+	not (True or False)		False
+	not (True or True)		False
+	not (False or True)		False
+	not (False or False)	True
+
+	NOT AND					True?
+	not (True and False)	True	
+	not (True and True)		False 
+	not (False and True)	True	
+	not (False and False)	True
+
+
+	!=						True ?
+	1 != 0					True
+	1 != 1					False
+	0 != 1					True
+	0 != 0					False
+
+	==						True ?
+	1 == 0					False
+	1 == 1					True
+	0 == 1					False
+	0 == 0					True	
+
+25. 为什么 "test" and "test" 返回 "test", 1 and 1 返回 1,而不是返回 True 呢?
+	Python 和很多语言一样,都是返回两个被操作对象中的一个,而非它们的布尔表达式 True 或 False 。这意味着如果你写了 False and 1 ,你得到的是第一个操作字元 (False),而非第二个字元(1)。
+
+26. 为什么if语句的下一行需要 4 个空格的缩进?行尾的冒号的作用是告诉 Python 接下来你要 创建一个新的代码区段。这根你创建函数时的冒号是一个道理。
+
+27. 如果多个 elif 区块都是 True 是 python 会如何处理?
+	Python 只会运行它碰到的是 True 的第一个区块,所以只有第一个为 True 的区块会被运行。
+
+28. 可以用多个 if/else 来取代 elif 吗?
+	有时候可以,不过这也取决于额 if/else 是怎样写的,而且这样一来 python 就需要去 检查每一处 if/else,而不是像 if/elif/else 一样,只要检查到第一个 True 就可以停下来了。试着写些代码看两者有何不同。
+
+29. 怎样判断一个数字处于某个值域中? 两个办法:经典语法是使用 1 < x < 10,或者用 x in range(1, 10) 也可以。
+
+30. 首先我们看看如 何创建列表:
+	你要做的是以 [ (左方括号)开头“打开”列表,然后写下你要放入列表的东西,用逗号隔开,就跟函 数的参数一样,最后你需要用 ] (右方括号)结束右方括号的定义。
+	然后 Python 接收这个列表以及里 边所有的内容,将其赋给一个变量。
+	eyes = ['brown', 'blue', 'green']
+
+31. range()函数会从第一个数到最后一个,但不包含最后一个数字。赋值为range(0,6)  = [0,1,2,3,4,5];		%s ---打印出来的字符串没有单引号;		％r 打印出来的字符串含有单引号
+
+32. 如何创建二维列表?就是在列表中包含列表,例如这样: [[1,2,3],[4,5,6]]
+
+33. elements.append() 是什么功能? 它的功能是在列表的尾部追加元素。
+
+34. While 循环有一个问题,那就是有时它会永不结束。为了避免这样的问题,你需要遵循下面的规定:
+	1). 尽量少用 while-loop,大部分时候 for-loop 是更好的选择。
+	2). 重复检查你的 while 语句,确定你测试的布尔表达式最终会变成 False 。
+	3). 如果不确定,就在 while-loop 的结尾打印出你要测试的值。看看它的变化。
+
+35. numbers = []	numbers.append(i)	print "Numbers now: ", numbers   打印的数列！！！！！
+
+36. for-loop 和 while-loop 有何不同? for-loop 只能对一些东西的集合进行循环, while-loop 可以对任何对象进行驯化。 然而,while-loop 比起来更难弄对,而一般的任务用 for-loop 更容易一些。
+
+37. Python 的列表也是从 0 开始的。虽然看上去很奇怪,这样定义其实有它的好处. 
+    “序数(ordinal number)”,因为它们表示的是事物的顺序. 记住: ordinal == 有序,以 1 开始;cardinal == 随机选取, 以 0 开始。
+
+38. 序数(ordinal number)和基数(cardinal number)
+
+39. If 语句的规则
+	1). 每一个“if 语句”必须包含一个 else.
+	2). 如果这个 else 永远都不应该被执行到,因为它本身没有任何意义,那你必须在 else 语句后面使用一个叫做 die 的函数,让它打印出错误信息并且死给你看,这和上一节的习题类似,这样你可以找到很多的错误。
+	3). “if 语句”的嵌套不要超过 2 层,最好尽量保持只有 1 层。 这意味着如果你在 if 里边又有了一个 if,那你就需要把第二个 if 移到另一个函数里面。
+	4). 将“if 语句”当做段落来对待,其中的每一个 if, elif, else 组合就跟一个段落的句子组合一样。在这种组合的最前面和最后面留一个空行以作区分。
+	5). 你的布尔测试应该很简单,如果它们很复杂的话,你需要将它们的运算事先放到一个变量里,并且为变量取一个好名字。
+
+40. 循环的规则
+	1). 只有在循环永不停止时使用“while 循环”,这意味着你可能永远都用不到。这条只有 Python 中成立,其他的语言另当别论。
+	2). 其他类型的循环都使用“for 循环”,尤其是在循环的对象数量固定或者有限的情况下。i
+
+41. 调试(debug)的小技巧
+	1). 不要使用 “debugger”。 Debugger 所作的相当于对病人的全身扫描。你并不会得到某方面的 有用信息,而且你会发现它输出的信息态度,而且大部分没有用,或者只会让你更困惑。
+	2). 最好的调试程序的方法是使用 print 在各个你想要检查的关键环节将关键变量打印出来,从而 检查哪里是否有错。
+	3). 让程序一部分一部分地运行起来。不要等一个很长的脚本写完后才去运行它。写一点,运行一点, 再修改一点。
+
+42. 通读你打印出来的代码并做好标记,标记的内容包括以下几个方面:
+	1). 函数以及函数的功能。
+	2). 每个变量的初始赋值。
+	3). 每个在程序的各个部分中多次出现的变量。它们以后可能会给你带来麻烦。 4. 任何不包含 else 的 if 语句。它们是正确的吗?
+	5). 任何可能没有结束点的 while 循环。
+	6). 最后一条,代码中任何你看不懂的部分都记下来。
+
+43. 各种符号
+	1)	Keywords(关键字)
+		• and
+		• del
+		• from 
+		• not
+		• while 
+		• as
+		• elif
+		• global
+		• or
+		• with
+		• assert
+		• else
+		• if
+		• pass
+		• yield
+		• break
+		• except
+		• import
+		• print
+		• class
+		• exec
+		• in
+		• raise
+		• continue • finally • is
+		• return
+		• def
+		• for
+		• lambda
+		• try
+
+	2)	数据类型
+		针对每一种数据类型,都举出一些例子来,例如针对 string,你可以举出一些字符串,针对 number, 你可以举出一些数字。
+		• True
+		• False
+		• None
+		• strings 
+		• numbers 
+		• floats 
+		• lists
+
+	3)	字符串转义序列(Escape Sequences) 对于字符串转义序列,你需要再字符串中应用它们,确认自己清楚地知道它们的功能。
+		• \\ 
+		• \' 
+		• \" 
+		• \a 
+		• \b 
+		• \f 
+		• \n 
+		• \r 
+		• \t 
+		• \v
+	4)	字符串格式化(String Formats) 一样的,在字符串中使用它们,确认它们的功能。
+		• %d 
+		• %i 
+		• %o 
+		• %u 
+		• %x 
+		• %X 
+		• %e 
+		• %E 
+		• %f 
+		• %F 
+		• %g 
+		• %G 
+		• %c 
+		• %r
+		• %s 
+		• %%
+	5)	操作符号
+		有些操作符号你可能还不熟悉,不过还是一一看过去,研究一下它们的功能,如果你研究不出来也没关系,记录下来日后解决。
+		•+ 
+		•- 
+		•*
+		• ** 
+		•/
+		• // 
+		•% 
+		•< 
+		•>
+		• <= 
+		• >= 
+		• == 
+		• != 
+		• <> 
+		• () 
+		• [] 
+		• {}
+		•@ 
+		•, 
+		•: 
+		•. 
+		•= 
+		•;
+		• += 
+		• -= 
+		• *= 
+		• /= 
+		• //= 
+		• %= 
+		• **=
+
+44. list：列表（即动态数组，C++标准库的vector，但可含不同类型的元素于一个list中）a = ["I","you","he","she"]      ＃元素可为任何类型。
+	
+	下标：按下标读写，就当作数组处理以0开始，有负下标的使用0第一个元素，-1最后一个元素，-len第一个元 素，len-1最后一个元素
+
+	取list的元素数量                
+	len(list)   #list的长度。实际该方法是调用了此对象的__len__(self)方法。 
+
+	创建连续的list
+	L = range(1,5)      #即 L=[1,2,3,4],不含最后一个元素
+	L = range(1, 10, 2) #即 L=[1, 3, 5, 7, 9]
+
+	list的方法
+	L.append(var)   #追加元素
+	L.insert(index,var)
+	L.pop(var)      #返回最后一个元素，并从list中删除之
+	L.remove(var)   #删除第一次出现的该元素
+	L.count(var)    #该元素在列表中出现的个数
+	L.index(var)    #该元素的位置,无则抛异常 
+	L.extend(list)  #追加list，即合并list到L上
+	L.sort()        #排序
+	L.reverse()     #倒序
+
+	list 操作符:,+,*，关键字del
+	a[1:]       #片段操作符，用于子list的提取
+	[1,2]+[3,4] #为[1,2,3,4]。同extend()
+	[2]*4       #为[2,2,2,2]
+	del L[1]    #删除指定下标的元素
+	del L[1:3]  #删除指定下标范围的元素
+	
+	list的复制
+	L1 = L      #L1为L的别名，用C来说就是指针地址相同，对L1操作即对L操作。函数参数就是这样传递的
+	L1 = L[:]   #L1为L的克隆，即另一个拷贝。
+	        
+	list comprehension
+	[ <expr1> for k in L if <expr2> ]
+
+45. dictionary： 字典（即C++标准库的map）
+	dict = {'ob1':'computer', 'ob2':'mouse', 'ob3':'printer'}
+	每一个元素是pair，包含key、value两部分。key是Integer或string类型，value 是任意类型。
+	键是唯一的，字典只认最后一个赋的键值。
+	
+	dictionary的方法
+	D.get(key, 0)       #同dict[key]，多了个没有则返回缺省值，0。[]没有则抛异常
+	D.has_key(key)      #有该键返回TRUE，否则FALSE
+	D.keys()            #返回字典键的列表
+	D.values()
+	D.items()
+	
+	D.update(dict2)     #增加合并字典
+	D.popitem()         #得到一个pair，并从字典中删除它。已空则抛异常
+	D.clear()           #清空字典，同del dict
+	D.copy()            #拷贝字典
+	D.cmp(dict1,dict2)  #比较字典，(优先级为元素个数、键大小、键值大小)
+	                    #第一个大返回1，小返回-1，一样返回0
+	            
+	dictionary的复制
+	dict1 = dict        #别名
+	dict2=dict.copy()   #克隆，即另一个拷贝。
+	
+	tuple：元组（即常量数组）
+	tuple = ('a', 'b', 'c', 'd', 'e')
+	可以用list的 [],:操作符提取元素。就是不能直接修改元素。
+	
+	string：     字符串（即不能修改的字符list）
+	str = "Hello My friend"
+	字符串是一个整 体。如果你想直接修改字符串的某一部分，是不可能的。但我们能够读出字符串的某一部分。
+	子字符串的提取
+	str[:6]
+	字符串包含 判断操作符：in，not in
+	"He" in str
+	"she" not in str
+
+46. dict在遍历的时候使不能动态的改变大小的. 第二个方法 d.keys() 直接生成出了新的数组.在遍历的时候是对新的数组做的遍历.所以也就没有报错.
+	list 也存在这个情况的问题.就是在遍历的时候不能动态的改变大小.
+	
+	dict 是哈希表，没有任何顺序保证, 写内存就是这个顺序.
+	甚至两个内容完全相同的 dict，都有可能输出的顺序不同（被这个问题狠狠地坑过，印象深刻..）
+	需要有序的话，自己 sort 一次
+
+47. python dict几种遍历方式性能简单比较
+
+	Python中对dict的遍历有很多种方法，本文中对几种方法性能进行比较简单的对比，给大家一个参考
+
+	测试环境
+	Windows10 + Python2.7.8
+
+	测试代码
+	dict_test.py
+
+	首先看我们的测试代码
+
+	# -*- coding: utf-8 -*-
+	l = [(x,x) for x in xrange(10000000)]
+	d = dict(l)  
+	
+	from time import clock  
+	time_list = []
+	time_list.append(clock())
+
+	#print d
+	#该方法内部实现还不清楚，效率很高，感觉和dict.iterkeys()类似，待考证
+	for i in d:
+	    t = i + d[i]
+	#print "%d, %d" % (i, d[i])
+	time_list.append(clock())
+
+	#print d.keys()
+	#调用内置方法dict.keys()，该方法将字典中的键以列表的形式返回
+	for i in d.keys():
+		t = i + d[i]
+	time_list.append(clock())
+
+	#print d.iterkeys()
+	#调用内置方法dict.iterkeys()，该方法返回针对键的迭代器
+	for i in d.iterkeys():
+		t = i + d[i]
+	time_list.append(clock())
+
+	#print d.items()
+	#dict.items()，items方法将所有字典项以列表方式返回，这些列表项中的每一项都来自于（键、值），但是在项返回时并没有特殊顺序
+	for k,v in d.items():
+		t = k + v
+	time_list.append(clock())
+
+	#print d.iteritems()
+	#dict.iteritems()，iteritems作用大致一样，但是会返回一个迭代器对象而不是列表
+	for k,v in d.iteritems():
+		t = k + v
+	time_list.append(clock())
+	#补充 items()返回的是一个列表，所以当dict很大时会消耗大量内存。在python3中，items()进行了优化，也只返回迭代器，所以取消iteritems方法
+
+	#print zip(d.iterkeys(),d.itervalues())
+	#zip函数接受任意多个（包括0个和1个）序列作为参数，返回一个tuple列表
+	#关于zip函数的详细说明可以参考 http://www.cnblogs.com/frydsh/archive/2012/07/10/2585370.html
+	for k,v in zip(d.iterkeys(),d.itervalues()):
+		t = k + v
+	time_list.append(clock())
+
+	#打印各个方法所花时间
+	i = 0
+	while i < time_list.__len__() - 1:
+		print "%d: %s" % (i, time_list[i + 1] - time_list[i])
+		i = i + 1
+
+
+	运行结果
+															   
+	运行四次
+															   
+	第一次
+	0: 2.55650656968
+	1: 2.81541793721
+	2: 2.60263192552
+	3: 13.3213878899
+	4: 2.88246335262
+	5: 4.9362081227
+															   
+	第二次
+	0: 2.59641417876
+	1: 2.66579489621
+	2: 2.57118659521
+	3: 14.0514050106
+	4: 3.30343528077
+	5: 5.3133750038
+															   
+	第三次
+	0: 2.54319498334
+	1: 2.71084397889
+	2: 2.50744050815
+	3: 13.2553875455
+	4: 2.92418555176
+	5: 4.9001545927
+															   
+	第四次
+	0: 2.61268754242
+	1: 2.72744719433
+	2: 2.73589164328
+	3: 13.613833514
+	4: 3.02585041181
+	5: 5.39626910881
+	
+	结论
+															   
+	一般情况下耗时排序(从大到小)
+	
+	for k,v in dict.items()
+	>>
+	for k,v in zip(d.iterkeys(),d.itervalues())
+	>
+	for k,v in d.iteritems()
+	>
+	for i in d.keys()
+	>
+	for i in d.iterkeys()
+	=
+	for i in d
+	可以知道，dict.items()方法的耗时要远远大于其他方法，特别是在数据量大的时候，要慎用
+	
+	其他几种方法的差别都不是很大，可以根据实际情况选择；其中dict.iteritems()效率较高，代码上也比较直观，推荐使用
+	
+	理解这几种遍历方式的差异的关键就在于理解dict.items()与dict.iteritems()的区别，dict.keys()和dict.iterkeys()也是类似
+	
+	items()返回的是一个列表，所以当dict很大时会消耗大量内存，iteritems作用大致一样，但是会返回一个迭代器对象而不是列表。在python3中，items()进行了优化，也只返回迭代器，所以取消iteritems方法
+	
+48. Python 将这种数据类型叫做 “dict”,有的语言里它的名称是 “hash”。这两种名字我都会用到,不过这并不重要,重要的是它们和列表的区别：
+	你可以使用数字作为列表的索引,也就是你可以通过数字找到列表中的元素。而 dict 所作的,是让你 可以通过任何东西找到元素,不只是数字。
+	是的,字典可以将一个物件和另外一个东西关联,不管它们 的类型是什么.
+	你将看到除了通过数字以外,我们还可以用字符串来从字典中获取 stuff ,我们还可以用字符串来往字典中添加元素。
+	当然它支持的不只有字符串一个只能放东西进去的字典是没啥意思的,所以我们还要有删除物件的方法,也就是使用 del这个关键字
+
+	列表和字典有何不同?
+	列表是有序排列的一些物件,而字典是将一些物件(keys)对应到另外一些物件(values) 的数据结构。
+	
+	字典能用在哪里?
+	各种你需要通过某个值去查看另一个值的场合。其实你可以把字典当做一个“查询表”。
+	
+	列表能用在哪里?
+	列表是专供有序排列的数据使用的。你只要知道索引就能查到对应的值了。
+	
+	有没有办法弄一个可以排序的字典?
+	看看 Python 里的 collections.OrderedDict 数据结构。上网搜索一下文档和用 法。
+
+49. class Song(object):
+		def _init_(self, lyrics):
+			self.lyrics = lyrics
+
+		def sing_me_a_song(self):
+			for line in self.lyrics
+			print line
+
+	happy_bday = Song(["Happy birthday to you", 
+				"I don't want to get sued",
+				"So I'll stop right there"])
+																		
+	bulls_on_parade = Song(["They really around the family",
+					"With pockets full of shells"])
+																		
+	happy_bday.sing_me_a_song()
+	
+	bulls_on_parade.sing_me_a_song()
+	
+
+	第一部分定义一个叫Song的类，里面有两种方法 init 和sing_me_a_song
+	方法1，init方法，大概相当于java中的构造方法，在类建立的时候执行。把传入的参数作为lyrics.
+	方法2，sing_me_a_song，手动执行，把lyrics逐行打印出来。逐行打印使用循环实现
+	将歌词列表1作为参数调用Song()，赋值给happy_bday
+	将歌词列表2作为参数调用Song()，赋值给bulls_on_parade
+	调用happy_bday中的sing_me_a_song()方法：输出歌词1
+	调用bulls_on_parade中的sing_me_a_song()方法：输出歌词2
+	
+	init和self的关系我也不是很清楚，只能说说理解：	
+	在python中__init__这个方法在类被调用的时候会执行一边用于初始化这个类。
+	在类中的方法被调用的话类会将自己作为一个参数传递给方法，所以类中的方法需要用一个参数来接纳，这个参数就是self
+
+	为什么创建 __init__ 或者别的类函数时需要多加一个 self 变量?
+	如果你不加 self , cheese = 'Frank' 这样的代码意义就不明确了,它指的既可能 是实例的 cheese 属性,或者一个叫做 cheese 的局部变量。
+	有了 self.cheese = 'Frank' 你就清楚地知道了这指的是实例的属性 self.cheese 。
+
+	 __init__ 函数里,我们有一个多余的函数叫做 self ,这就是 Python 为我们创建的空对象,而我可以对它进行类似模块、字典等的操作,为它设置一些变量进去
+
+	为什么用 self 呢?因为你的函数并不知道你的这个“实例” 是来自叫 TheThing 或者别的名字的 class。所以你只要使用一个通用的名字 self 。这样你写出来 的函数就会在任何情况下都能正常工作。
+
+	接下来,看到 __init__ 函数了吗?这就是你为 Python class 设置内部变量的方式。你可以使用 . 将它们设置到 self 上面
+
+50. 关于错误：object() takes no parameters  如果你出现了这个报错，请检查你的__init__函数名或者其定义有没有写错。注意：下划线左右是两个；中间的英文字母是四位，请一一对应
+	
+	最可能的解释是：
+	在实例化一个对象的时候，使用 类名+(参数)并没有成功调用到这个初始化参数，编译器默认调用类名+( ) ，这是一个无参的初始化函数，自然就不需要传进参数了。
+	如果尝试调用自己定义的初始化函数的方法没有错的话，那么之所以不能成功调用初始化函数，错误就在于初始化函数本身！
+
+51. SyntaxError: invalid syntax 一般是语句后面的符号不对，比如忘记加上冒号:
+
+52. 记住这个“从 Y 获取 X”的概念,现在再来看看模块(module),你已经创建和使用过一些模块了,你已 经了解了它们的一些属性:
+	1). 模组是包含函数和变量的 Python 文件。
+	2). 你可以 import 这个文件。
+	3). 然后你可以使用 ‘.’ 操作符访问到模组中的函数和变量。
+
+53. Python 里边有这么一个通用的模式: 
+	1). 拿一个类似 key=value 风格的数据容器
+	2). 通过 key 的名称获取其中的 value
+	对于字典来说,key 是一个字符串,获得值的语法是 [key] 。对于模块来说,key 是函数或者变量的名称,而语法是 .key 。除了这个,它们基本上就没什么区别了
+
+54. 类和模块差不多
+	模块还可以用一种方法去理解:你可以把它们当做一种特殊的字典,通过它们你可以储存一些 Python 代码,而你可以通过 ‘.’ 操作符访问到这些代码。
+	Python 还有另外一种代码结构用来实现类似的目的, 那就是 类(class) ,通过类,你可以把一组函数和数据放到一个容器中,从而用 ‘.’ 操作符访问到它们。
+
+55. 使用类而非模块的原因如下:你可以拿着上面这个类,重复创建出很多出来,哪怕是一次一百万个,它 们也不会互相干涉到。
+	而对于模块来说,当你一次 import 之后,整个程序里就只有这么一份内容,只有 鼓捣得很深才能弄点花样出来。
+
+56. 对象相当于迷你版的 import
+	如果说类和迷你模块差不多,那么对于类来说,也必然有一个类似 import 的概念。
+	这个概念名称就是 “实例(instance)”。这只是一种故作高深的叫法而已,它的意思其实是“创建”。当你将一个类“实例 化”以后,你就得到了一个 对象(object) 。
+	
+	这就是当你像调用函数一样调用类的时候, Python 完成这个“迷你 import”的过程。记住这不是拿来一个类就直接用,而是将类当做一个“蓝图”,然后用它创建和这个类有相同属性的拷贝。
+
+	事实上类和对象和模组是完全不同的东西。如果我实实在在 地跟你讲的话,我大概会说出下面的这些东西:
+	• 类就像一种蓝图、或者一种预定义的东西,通过它可以创建新的迷你模块。
+	• 实例化的过程相当于你创建了这么一个迷你模块,而且同时 import 了它。
+	• 结果生成的迷你模块就是一个对象,你可以将它赋予一个变量并进行后续操作。
+	而通过这一系列的操作,类和对象和模块已经很不同了,所以这里的内容只是为了让你理解类的概念而已。
+
+	从东西里获取东西 现在我有三种方法可以从某个东西里获取它的内容:
+	# dict style
+	mystuff['apples']
+	
+	# module style
+	mystuff.apples()
+	print mystuff.tangerine
+	
+	# class style
+	thing = MyStuff()
+	thing.apples()
+	print thing.tangerine
+
+57. stuff = ['Test', 'This', 'Out']
+	print ' '.join(stuff)
+	其实你这里已经使用了 class。``stuff`` 这个变量其实是一个 list class (列表类)。
+	而 ' '.join(stuff) 里调用函数 join 的字符串 ' ' (就是一个空格)也是一个 class —— 它是一 个 string class (字符串类)。到处都是 class! 
+
+58. 重点需要理解这些东西
+	1). 怎样创建一个 class Game(object) 并且放函数到里边去。
+	2). __init__是一个特殊的初始方法,可以预设重要的变量在里边。
+	3). 为 class 添加函数的方法是将函数在 class 下再缩进一阶,class 的架构就是通过缩进实现的,这点很重要。
+	4). 你在函数里的内容又缩进了一阶。
+	5). 注意冒号的用法。
+	6). 理解 self 的概念,以及它在 __init__ 、 play 、 death 里是怎样使用的。
+	7). 研究 play 里的 getattr 的功能,这样你就能明白 play 所做的事情。其实你可以手动在Python 命令行实验一下,从而弄懂它。
+	8). 最后我们怎样创建了一个 Game ,然后通过 play() 让所有的东西运行起来。
+	9). 研究一下 __dict__ 是什么东西,应该怎样使用。
+
+59. result = sentence[:] 是做什么的?
+	这是 Python 中复制 list 的方法。你用了列表切片(list slice)的语法 [:] ,其效果是将 列表从头到尾每个元素切片出来并创建了一个新列表。
+
+60. “类(class)”和“对象(object)”的区别。问题在于,class 和 object 并没有真正的不同。它们其实是同样的东西,只是在不同的时间名字不同罢了。
+
+	这里的关系式:对象属于某个类,而某个类又属于另一个类。
+
+	你只要在创建和使用 class 的时候操心一下就可以了。我来给你两个区分 Class 和 Object 的小技巧。 
+	首先针对类和对象,你需要学会两个说法,“is-a(是啥)”和“has-a(有啥)”。“是啥”要用在谈论“两者
+	以类的关系互相关联”的时候,而“有啥”要用在“两者无共同点,仅是互为参照”的时候。
+	记住,“是啥”指的是鱼和泥鳅的关系,而“有啥”指的是泥鳅和鳃的关系。
+
+	就假设 Python 的 class 永 远都要求你加上 (object) 好了,你的脑力要留着思考更重要的问题。
+
+61. 常见问题回答
+	这句 self.pet = None 有什么用? 确保类的 self.pet 属性被设置为 None。
+	super(Employee, self).__init__(name) 是做什么用的? 这样你可以可靠地将父类的 __init__ 方法运行起来。搜索“python super”,看看它的 优缺点。
+
+62. 我再教你一个小技巧。如果你倒着阅读的话,代码可能会变得更容易理解。让我们来试一下,一样是那行:
+	1). state 和 city 是...
+	2). 作为参数传递给...
+	3). 一个函数,位置在...
+	4). '_find'然后寻找,目的地为... 5. cities这个位置...
+	6). 最后赋值给 city_found. 
+	
+	还有一种方法读它,这回是“由里向外”。
+	1). 找到表达式的中心位置,此次为 ['_find'].
+	2). 逆时针追溯,首先看到的是一个叫 cities 的字典,这样就知道了 cities 中的 _find 元素。 
+	3). 上一步得到一个函数。继续逆时针寻找,看到的是参数。
+	4). 参数传递给函数后,函数会返回一个值。然后再逆时针寻找。
+	5). 最后,我们到了 city_found = 的赋值位置,并且得到了最终结果。
+
+	数十年的编程下来,我在读代码的过程中已经用不到上面的三种方法了。我只要瞟一眼就能知道它的意 思。甚至给我一整页的代码,我也可以一眼瞄出里边的 bug 和错误。
+	这样的技能是花了超乎常人的时间 和精力才锻炼得来的。
+	
+	在磨练的过程中,我学会了下面三种读代码的方法,它们适用于几乎所有的编程 语言:
+	1). 从前向后。
+	2). 从后向前。 
+	3). 逆时针方向。
+	下次碰到难懂的语句时,你可以试试这三种方法
+
+63. 
+
+
+
+
+
+
+
+
+
